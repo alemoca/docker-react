@@ -9,7 +9,7 @@ before_install:
   - docker build -t react-app -f Dockerfile.dev .
 
 script:
-  - docker run -e CI=true docker-react npm run test -- --coverage
+  - docker run -e CI=true alemoca/docker-react npm run test -- --coverage
 # script:
 # #-- --coverage npm run test command exits when the tests are done
 #   - docker run react-app npm run test
