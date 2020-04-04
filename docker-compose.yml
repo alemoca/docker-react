@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  react-app:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+        - "3000:3000"
+    volumes:
+        - /app/node_modules
+        - .:/app
+
+# serviciu ce se va ocupa automat de rularea testelor in env de dev
+  run-test-app:
+  # va avea nevoie de id -ul imaginii:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      # testele vor fi rulate de fiecare data cand ceva este modificat
+    volumes:
+      - /app/node_modules
+      - .:/app
+    # si vom suprascrie comanda din Dockerfile.dev cea de npm run start
+    # echivalent cu docker exec -it id image:latest din build nmp run test
+    command: ["npm", "run", "test"]
