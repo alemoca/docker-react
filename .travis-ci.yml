@@ -1,4 +1,5 @@
 sudo: required
+language: generic
 
 # tell travis we need a copy of docker running
 services:
