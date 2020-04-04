@@ -1,0 +1,12 @@
+sudo: required
+
+# tell travis we need a copy of docker running
+services:
+    - docker
+# build our image using Dockerfile.dev
+before_install:
+  - docker build -t react-app -f Dockerfile.dev .
+
+script:
+#-- --coverage npm run test command exits when the tests are done
+  - docker run react-app npm run test -- --coverage
