@@ -11,32 +11,32 @@ before_install:
 script:
   - docker run -e CI=true react-app npm run test -- --coverage
 
-deploy:
-  # Fix for Missing bucket_name error
-  edge: true
-  # tell treavis to aotumatically deploy on aws elasticbeanstalk
-  provider: elasticbeanstalk
-  # where we created our elasticbeanstalk instance
-  # we also received an URL where our app is deployed
-  region: "us-west-2"
-  # same name as we added when we created our elasticbeanstalk instance
-  app: docker-react
-  env: docker-env
-  # travis ci, makes an archive of our entire application form github and saved it to a AWS HDD
-  bucket_name: "elasticbeanstalk-us-we-2-number"
-  # se services -> amazon s-3 -> cautam elasticbeanstalk-region
-  # ussually bucket_path = app-name
-  bucket_path: "docker-react"
-  #  we want to deploy our app only from master branch
-  on:
-    branch: master
-  # API keys from AWS account
-  # Travis need acces to it
-  # for genearating = > AWS -> Services -> search IAM ( API keys manager )
-  # we will create an user and giveprogramatic access only to it
-  # add permission to user (provide full access)
-  # we don't want to put those AWS key to github => we use env secrets provided by Travis
-  # We stash those secret keys in Settings from Travis
-  acces_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: $AWS_SECRET_KEY
+# deploy:
+#   # Fix for Missing bucket_name error
+#   edge: true
+#   # tell treavis to aotumatically deploy on aws elasticbeanstalk
+#   provider: elasticbeanstalk
+#   # where we created our elasticbeanstalk instance
+#   # we also received an URL where our app is deployed
+#   region: "us-west-2"
+#   # same name as we added when we created our elasticbeanstalk instance
+#   app: docker-react
+#   env: docker-env
+#   # travis ci, makes an archive of our entire application form github and saved it to a AWS HDD
+#   bucket_name: "elasticbeanstalk-us-we-2-number"
+#   # se services -> amazon s-3 -> cautam elasticbeanstalk-region
+#   # ussually bucket_path = app-name
+#   bucket_path: "docker-react"
+#   #  we want to deploy our app only from master branch
+#   on:
+#     branch: master
+#   # API keys from AWS account
+#   # Travis need acces to it
+#   # for genearating = > AWS -> Services -> search IAM ( API keys manager )
+#   # we will create an user and giveprogramatic access only to it
+#   # add permission to user (provide full access)
+#   # we don't want to put those AWS key to github => we use env secrets provided by Travis
+#   # We stash those secret keys in Settings from Travis
+#   acces_key_id: $AWS_ACCESS_KEY
+#   secret_access_key:
+#     secure: $AWS_SECRET_KEY
